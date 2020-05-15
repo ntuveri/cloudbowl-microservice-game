@@ -73,8 +73,20 @@ public class Application {
 			return "T";
 		}
 
-		int i = new Random().nextInt(4);
-		return commands[i];
+		if(me.y == 0 && me.direction == "S") {
+			return me.x > arenaUpdate.arena.dims.get(0) / 2 ? "R" : "L";
+		}
+		if(me.y == arenaUpdate.arena.dims.get(1) - 1 && me.direction == "N") {
+			return me.x > arenaUpdate.arena.dims.get(0) / 2 ? "R" : "L";
+		}
+		if(me.x == 0 && me.direction == "W") {
+			return me.y > arenaUpdate.arena.dims.get(1) / 2 ? "L" : "R";
+		}
+		if(me.x == arenaUpdate.arena.dims.get(0) - 1 && me.direction == "E") {
+			return me.y > arenaUpdate.arena.dims.get(0) / 2 ? "L" : "R";
+		}
+
+		return "F";
 	}
 
 	private PlayerState me(ArenaUpdate arenaUpdate) {
@@ -96,23 +108,27 @@ public class Application {
 			switch (me.direction) {
 				case ("N"):
 					if (xDistance == 0 && yDistance <= hitDistance && me.y < ps.y) {
+						System.out.println("Direction N: throwing jambon");
 						return true;
 					}
 					break;
 				case ("S"): {
 					if (xDistance == 0 && yDistance <= hitDistance && me.y > ps.y) {
+						System.out.println("Direction S: throwing jambon");
 						return true;
 					}
 					break;
 				}
 				case ("W"): {
 					if (yDistance == 0 && xDistance <= hitDistance && me.x > ps.x) {
+						System.out.println("Direction W: throwing jambon");
 						return true;
 					}
 					break;
 				}
 				case ("E"): {
 					if (yDistance == 0 && xDistance <= hitDistance && me.x < ps.x) {
+						System.out.println("Direction E: throwing jambon");
 						return true;
 					}
 					break;
