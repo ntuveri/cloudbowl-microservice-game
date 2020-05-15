@@ -62,14 +62,19 @@ public class Application {
 	@PostMapping("/**")
 	public String index(@RequestBody ArenaUpdate arenaUpdate) {
 		System.out.println(arenaUpdate);
-		String[] commands = new String[]{"F", "R", "L", "T"};
+		String[] commands = new String[]{"F", "R", "L", "F"};
 
 		PlayerState me = me(arenaUpdate);
+		if(me == null) {
+			me = new PlayerState();
+			me.direction = "N";
+		}
+
 		if(canHit(arenaUpdate, me)) {
 			return "T";
 		}
 
-		int i = new Random().nextInt(3);
+		int i = new Random().nextInt(4);
 		return commands[i];
 	}
 
@@ -99,16 +104,19 @@ public class Application {
 					if (xDistance == 0 && yDistance <= hitDistance && me.y > ps.y) {
 						return true;
 					}
+					break;
 				}
 				case ("W"): {
 					if (yDistance == 0 && xDistance <= hitDistance && me.x > ps.x) {
 						return true;
 					}
+					break;
 				}
 				case ("E"): {
 					if (yDistance == 0 && xDistance <= hitDistance && me.x < ps.x) {
 						return true;
 					}
+					break;
 				}
 			}
 		}
