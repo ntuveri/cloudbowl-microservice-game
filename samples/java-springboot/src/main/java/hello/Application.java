@@ -65,11 +65,7 @@ public class Application {
 		String[] commands = new String[]{"F", "R", "L", "F"};
 
 		PlayerState me = me(arenaUpdate);
-		if(me == null) {
-			me = new PlayerState();
-			me.direction = "N";
-		}
-
+		
 		if(canHit(arenaUpdate, me)) {
 			return "T";
 		}
@@ -79,7 +75,7 @@ public class Application {
 	}
 
 	private PlayerState me(ArenaUpdate arenaUpdate) {
-		return arenaUpdate.arena.state.get("ntuveri");
+		return arenaUpdate.arena.state.get(arenaUpdate._links.self);
 	}
 
 	private boolean canHit(ArenaUpdate arenaUpdate, PlayerState me) {
