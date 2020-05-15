@@ -100,7 +100,7 @@ public class Application {
 			.filter(entry -> !entry.getValue().equals(me))
 			.map(entry -> entry.getValue());
 
-		int hitDistance = 2;
+		int hitDistance = 1;
 
 		for (PlayerState ps : players.collect(Collectors.toList())) {
 			int yDistance = Math.abs(me.y - ps.y);
