@@ -68,11 +68,20 @@ public class Application {
 		String[] commands = new String[]{"F", "R", "L", "F"};
 
 		PlayerState me = me(arenaUpdate);
-		
+
+		if(me.wasHit) {
+			return move(arenaUpdate, me);
+		}
+
 		if(canHit(arenaUpdate, me)) {
 			return "T";
 		}
 
+		int i = new Random().nextInt(4);
+		return commands[i];
+	}
+
+	private String move(@RequestBody ArenaUpdate arenaUpdate, PlayerState me) {
 		if(me.y == 0 && me.direction == "S") {
 			return me.x > arenaUpdate.arena.dims.get(0) / 2 ? "R" : "L";
 		}
@@ -85,7 +94,6 @@ public class Application {
 		if(me.x == arenaUpdate.arena.dims.get(0) - 1 && me.direction == "E") {
 			return me.y > arenaUpdate.arena.dims.get(0) / 2 ? "L" : "R";
 		}
-
 		return "F";
 	}
 
