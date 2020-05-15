@@ -75,7 +75,7 @@ public class Application {
 	}
 
 	private PlayerState me(ArenaUpdate arenaUpdate) {
-		return arenaUpdate.arena.state.get(arenaUpdate._links.self);
+		return arenaUpdate.arena.state.get(arenaUpdate._links.self.href);
 	}
 
 	private boolean canHit(ArenaUpdate arenaUpdate, PlayerState me) {
