@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.WebDataBinder;
@@ -56,12 +57,13 @@ public class Application {
 
 	@GetMapping("/")
 	public String index() {
-		return "Let the battle begin!";
+		return "Nicola, let the battle begin!";
 	}
 
 	@PostMapping("/**")
 	public String index(@RequestBody ArenaUpdate arenaUpdate) {
-		System.out.println(arenaUpdate);
+		String jsonArenaUpdate = new ObjectMapper().writeValueAsString();
+		System.out.println("ArenaUpdate: " + jsonArenaUpdate);
 		String[] commands = new String[]{"F", "R", "L", "F"};
 
 		PlayerState me = me(arenaUpdate);
