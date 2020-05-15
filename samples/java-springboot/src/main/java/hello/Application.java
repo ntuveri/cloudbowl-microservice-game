@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -61,8 +62,8 @@ public class Application {
 	}
 
 	@PostMapping("/**")
-	public String index(@RequestBody ArenaUpdate arenaUpdate) {
-		String jsonArenaUpdate = new ObjectMapper().writeValueAsString();
+	public String index(@RequestBody ArenaUpdate arenaUpdate) throws JsonProcessingException {
+		String jsonArenaUpdate = new ObjectMapper().writeValueAsString(arenaUpdate);
 		System.out.println("ArenaUpdate: " + jsonArenaUpdate);
 		String[] commands = new String[]{"F", "R", "L", "F"};
 
